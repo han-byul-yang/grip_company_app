@@ -3,9 +3,9 @@ import styles from './App.module.scss'
 
 const App = () => {
   return (
-    <body className={styles.defaultStyle}>
+    <div className={styles.defaultStyle}>
       <Router />
-    </body>
+    </div>
   )
 }
 

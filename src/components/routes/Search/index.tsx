@@ -9,10 +9,11 @@ const Search = () => {
 
   useMount(() => {
     MovieApi({
-      s: '',
+      s: 'love',
       page: 1
     }).then((res) => {
       setApiData(res.data)
+      console.log(res.data)
     }).catch((error) => {
       console.log(error) 
     })
@@ -35,3 +36,5 @@ const Search = () => {
 }
 
 export default Search
+
+// api error 제대로 처리해주기

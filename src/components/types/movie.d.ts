@@ -8,6 +8,6 @@ interface IMovieData {
 
 export interface ISearchData {
   Search: ImovieData[]
-  TotalResults: string
-  Response: string
+  TotalResults: number
+  Response: boolean
 }

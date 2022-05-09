@@ -20,3 +20,5 @@ const Header = () => {
 }
 
 export default Header
+
+// 반응형으로 만들기

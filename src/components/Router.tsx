@@ -1,7 +1,7 @@
 import React from 'react'
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom'
-import BookMark from './routes/BookMark/BookMark'
-import Search from './routes/Search/Search'
+import BookMark from './routes/BookMark'
+import Search from './routes/Search'
 
 const Router = () => {
     return (
