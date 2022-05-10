@@ -1,0 +1,76 @@
+@import '../../../styles/constants/colors';
+
+@mixin modalBtn {
+  width: 80px;
+  height: 40px;
+  color: $BLACK;
+  border: 1px solid $BLACK;
+  border-radius: 8px;
+}
+
+.modalBackground {
+  position: fixed;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 76%);
+}
+
+.modalBox {
+  position: fixed;
+  z-index: 10;
+  display: none;
+  margin-top: 100%;
+  transform: translateY(-50%);
+}
+
+.show {
+  display: inline-block;
+}
+
+.unShow {
+  display: none;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  background: $GRAYE;
+  border-radius: 10px;
+}
+
+.head {
+  width: 100%;
+  height: 50px;
+  padding: 17px;
+  background: $BLACK;
+  border-radius: 10px 10px 0 0;
+}
+
+.askMessage {
+  padding: 30px;
+  line-height: 22px;
+  color: $BLACK;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.bookmarkBtn {
+  @include modalBtn;
+  margin-right: 20px;
+}
+
+.cancelBtn {
+  @include modalBtn;
+}

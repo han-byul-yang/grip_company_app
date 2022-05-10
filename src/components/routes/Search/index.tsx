@@ -1,14 +1,17 @@
 import { MovieApi } from "components/services/MovieApi"
 import { IMovieData } from "components/types/movie"
 import { useCallback, useEffect, useState } from 'hooks'
+import BookMarkModal from "../Modal/BookMarkModal"
+import ModalAct from "../Modal/ModalAct"
 import Header from "./Header"
 import styles from "./Search.module.scss"
 import Tabs from "./Tabs"
 
 const Search = () => {
   const [apiData, setApiData] = useState<IMovieData[]>([])
-  const [searchTitle, setSearchTitle] = useState('love')
+  const [searchTitle, setSearchTitle] = useState('')
   const [scrollLocation, setScrollLocation] = useState(0)
+  const [openModal, setOpenModal] = useState(false)
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -24,7 +27,7 @@ const Search = () => {
  
   /* if (!apiData) return null */
 
-  const handleWindowScroll = () => {
+  /* const handleWindowScroll = () => {
     setScrollLocation(window.scrollY)
     console.log(window.innerHeight)
     console.log(window.scrollY)
@@ -41,7 +44,11 @@ const Search = () => {
       window.removeEventListener('scroll', handleWindowScroll)
     })
   }, [scrollLocation])
-  
+  */
+
+  const handleModalClick = () => {
+    setOpenModal(true)
+  }
 
   return (
     <>
@@ -50,7 +57,8 @@ const Search = () => {
       <section className={styles.section}>
         <ul className={styles.resultList}>
           {apiData?.map((movie) => 
-            <li className={styles.eachResult}>
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <li className={styles.eachResult} onClick={handleModalClick}>
               <img src={movie.Poster} alt='movie poster'/>
               <div className={styles.contents}>
                 <div className={styles.title}>{movie.Title}</div>
@@ -61,6 +69,7 @@ const Search = () => {
         </ul>
       </section>
       <Tabs />
+      <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} />
     </>
   )
 }

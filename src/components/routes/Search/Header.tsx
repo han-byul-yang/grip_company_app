@@ -18,10 +18,12 @@ const Header = ({setSearchTitle} : Props) => {
   const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSearchTitle(inputTitle)
+    setInputTitle('')
   }
 
   const handleTitleClick = () => {
     setSearchTitle(inputTitle)
+    setInputTitle('')
   }
 
   return (

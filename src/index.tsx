@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client'
 import './styles/index.scss'
 import reportWebVitals from './reportWebVitals'
 import App from './components/App'
+import {BrowserView, MobileView} from 'react-device-detect'
+import ModalAct from 'components/routes/Modal/ModalAct'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <App />
+    <MobileView>
+      <App />
+    </MobileView>
   </React.StrictMode>
 )
 
