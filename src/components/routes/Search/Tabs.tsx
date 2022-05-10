@@ -1,11 +1,16 @@
+import { Link } from 'react-router-dom'
 import styles from './Search.module.scss'
 
 const Tabs = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.tabBtn}>
-        <button className={styles.searchTab} type="button">영화 검색</button>
-        <button className={styles.bookmarkTab} type="button">즐겨찾기</button>
+        <Link to="/">
+          <button className={styles.searchTab} type="button">영화 검색</button>
+        </Link>
+        <Link to="/bookmark">
+          <button className={styles.bookmarkTab} type="button">즐겨찾기</button>
+        </Link>
       </div>
     </nav>
   )

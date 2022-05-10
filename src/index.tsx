@@ -4,13 +4,16 @@ import './styles/index.scss'
 import reportWebVitals from './reportWebVitals'
 import App from './components/App'
 import {BrowserView, MobileView} from 'react-device-detect'
-import ModalAct from 'components/routes/Modal/ModalAct'
+import {RecoilRoot} from 'recoil'
+import { BrowserRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <MobileView>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </MobileView>
   </React.StrictMode>
 )
@@ -19,3 +22,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals()
+
+// browserview 써주기

@@ -1,11 +1,15 @@
+import { useEffect, useState } from 'hooks'
+
+import styles from "./Search.module.scss"
 import { MovieApi } from "components/services/MovieApi"
 import { IMovieData } from "components/types/movie"
-import { useCallback, useEffect, useState } from 'hooks'
+
 import BookMarkModal from "../Modal/BookMarkModal"
-import ModalAct from "../Modal/ModalAct"
 import Header from "./Header"
-import styles from "./Search.module.scss"
 import Tabs from "./Tabs"
+import { useSetRecoilState } from 'recoil'
+import { ClickedDataAtom } from 'components/atom'
+
 
 const Search = () => {
   const [apiData, setApiData] = useState<IMovieData[]>([])
@@ -13,6 +17,7 @@ const Search = () => {
   const [scrollLocation, setScrollLocation] = useState(0)
   const [openModal, setOpenModal] = useState(false)
   const [page, setPage] = useState(1)
+  const setClickedMovie = useSetRecoilState(ClickedDataAtom)
 
   useEffect(() => {
       MovieApi({
@@ -46,8 +51,9 @@ const Search = () => {
   }, [scrollLocation])
   */
 
-  const handleModalClick = () => {
+  const handleModalClick = (movie : IMovieData) => {
     setOpenModal(true)
+    setClickedMovie(movie)
   }
 
   return (
@@ -58,7 +64,7 @@ const Search = () => {
         <ul className={styles.resultList}>
           {apiData?.map((movie) => 
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <li className={styles.eachResult} onClick={handleModalClick}>
+            <li className={styles.eachResult} onClick={() => handleModalClick(movie)}>
               <img src={movie.Poster} alt='movie poster'/>
               <div className={styles.contents}>
                 <div className={styles.title}>{movie.Title}</div>

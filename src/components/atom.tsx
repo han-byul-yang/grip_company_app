@@ -1,10 +1,24 @@
 import { atom } from "recoil"
+import { IMovieData } from "./types/movie.d"
 
-export const searchTitleAtom = atom({
-  key: 'searchTitle',
-  default: '',
+export const ClickedDataAtom = atom<IMovieData>({
+  key: 'clickeddata',
+  default: {
+    Title: '',
+    Year: '',
+    imdbID: '',
+    Type: '',
+    Poster: '',
+  }
 })
 
-// 전체 즐겨찾기 데이터
-
-// 각 영화 정보들
+export const BookMarkDataAtom = atom<IMovieData[]>({
+  key: 'bookmarkdata',
+  default: [{
+    Title: '',
+    Year: '',
+    imdbID: '',
+    Type: '',
+    Poster: '',
+  }]
+})

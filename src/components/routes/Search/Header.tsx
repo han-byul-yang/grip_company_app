@@ -1,7 +1,5 @@
 import styles from './Search.module.scss'
 import {useState} from 'hooks'
-import { useRecoilState } from 'recoil'
-import { searchTitleAtom } from 'components/atom'
 import React, { Dispatch, SetStateAction } from 'react'
 
 interface Props {
