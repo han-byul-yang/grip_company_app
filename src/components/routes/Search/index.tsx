@@ -1,35 +1,55 @@
 import { MovieApi } from "components/services/MovieApi"
-import { ISearchData } from "components/types/movie"
+import { IMovieData } from "components/types/movie"
 import { useCallback, useEffect, useState } from 'hooks'
 import Header from "./Header"
 import styles from "./Search.module.scss"
 import Tabs from "./Tabs"
 
 const Search = () => {
-  const [apiData, setApiData] = useState<ISearchData>()
+  const [apiData, setApiData] = useState<IMovieData[]>([])
   const [searchTitle, setSearchTitle] = useState('love')
+  const [scrollLocation, setScrollLocation] = useState(0)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
       MovieApi({
         s: searchTitle,
-        page: 1
+        page
       }).then((res) => {
-          setApiData(res.data)
-          console.log(res.data)
+          setApiData(res.data.Search)
         }).catch((error) => {
         console.log(error.message)
       })
-  }, [searchTitle])
+  }, [searchTitle, page])
  
-  if (!apiData) return null
+  /* if (!apiData) return null */
+
+  const handleWindowScroll = () => {
+    setScrollLocation(window.scrollY)
+    console.log(window.innerHeight)
+    console.log(window.scrollY)
+    console.log(document.body.scrollHeight)
+    if (window.scrollY === window.innerHeight) {
+      setPage((preState) => preState + 1)
+      setApiData((prevState) => [...prevState, ...apiData])
+    } 
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleWindowScroll)
+    return (() => {
+      window.removeEventListener('scroll', handleWindowScroll)
+    })
+  }, [scrollLocation])
+  
 
   return (
     <>
       <Header setSearchTitle={setSearchTitle} /> {/* //recoil 사용? */}
-      <p className={styles.result}>검색 결과 {apiData.totalResults} 개</p>
+      <p className={styles.result}>검색 결과 1 개</p>
       <section className={styles.section}>
         <ul className={styles.resultList}>
-          {apiData.Search.map((movie) => 
+          {apiData?.map((movie) => 
             <li className={styles.eachResult}>
               <img src={movie.Poster} alt='movie poster'/>
               <div className={styles.contents}>
@@ -50,3 +70,4 @@ export default Search
 // api error 제대로 처리해주기
 // api 계속 불러오는 거 처리해줘야함 
 // 이미지나 title 을 불러오지 못할 때 처리
+// 재로딩이 계속 되니까 title을 recoil로 처리 해줘야 하나

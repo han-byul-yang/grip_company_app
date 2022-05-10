@@ -12,7 +12,7 @@ interface Params {
 export const MovieApi = (params: Params) =>
   axios.get<ISearchData>(`${MOVIE_BASE_URL}`, {
     params: {
-      apiKey: REST_API_KEY,
+      apiKey: 'be4206eb',
       ...params
   },
   })

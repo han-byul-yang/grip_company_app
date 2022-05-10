@@ -1,12 +1,28 @@
 @import '../styles/constants/colors';
 
 .defaultStyle {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   color: $WHITE;
   background: $BACKGROUND;
+
+  &::-webkit-scrollbar {
+    z-index: 100;
+    display: inline-block;
+    width: 20px;
+    height: 100%;
+    background: yellow;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    z-index: 100;
+    width: 20px;
+    height: 10px;
+    background: red;
+  }
 }
