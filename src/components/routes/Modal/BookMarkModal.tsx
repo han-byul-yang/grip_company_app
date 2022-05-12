@@ -2,9 +2,10 @@ import cx from 'classnames'
 import { Dispatch, SetStateAction } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
-import { BookMarkDataAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../../atom'
-import { IMovieData } from 'components/types/movie'
 import styles from './Modal.module.scss'
+
+import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../../atom'
+import { IMovieData } from 'components/types/movie'
 
 interface propsType {
   openModal: boolean
@@ -15,19 +16,19 @@ interface propsType {
 const BookMarkModal = ({ openModal, setOpenModal, state }: propsType) => {
   const clickedMovie: IMovieData = useRecoilValue(ClickedMovieDataAtom)
   const clickedBookmark: IMovieData = useRecoilValue(ClickedBookMarkDataAtom)
-  const setBookmarkMovie = useSetRecoilState(BookMarkDataAtom)
+  const setBookmarkMovie = useSetRecoilState(BookMarkListAtom)
 
   const handleCloseModal = () => {
     setOpenModal(false)
   }
 
   const handleBookmarkClick = () => {
-    setBookmarkMovie((prevState) => (prevState[0].Title === '' ? [clickedMovie] : [clickedMovie, ...prevState]))
+    setBookmarkMovie((prevState) => [clickedMovie, ...prevState])
     setOpenModal(false)
   }
 
   const handleDeleteBookmarkClick = () => {
-    setBookmarkMovie((prevState) => prevState.filter((ele) => ele.Title !== clickedBookmark.Title))
+    setBookmarkMovie((prevState) => prevState.filter((ele) => ele.imdbID !== clickedBookmark.imdbID))
     setOpenModal(false)
   }
 

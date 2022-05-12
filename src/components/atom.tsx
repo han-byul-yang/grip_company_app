@@ -34,14 +34,8 @@ export const ClickedBookMarkDataAtom = atom<IMovieData>({
   }
 })
 
-export const BookMarkDataAtom = atom<IMovieData[]>({
-  key: 'bookmarkData',
-  default: [{
-    Title: '',
-    Year: '',
-    imdbID: '',
-    Type: '',
-    Poster: '',
-  }],
+export const BookMarkListAtom = atom<IMovieData[]>({
+  key: 'bookmarkList',
+  default: [],
   effects_UNSTABLE: [persistAtom]
 })

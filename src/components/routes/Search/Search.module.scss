@@ -121,6 +121,7 @@
 }
 
 .contents {
+  position: relative;
   padding-top: 5px;
   padding-left: 13px;
 }
@@ -145,4 +146,17 @@
   text-align: center;
   background: $BTN;
   border-radius: 8px;
+}
+
+.icon {
+  position: absolute;
+  right: 20px;
+  bottom: 8px;
+  display: none;
+  font-size: 20px;
+  color: $RED;
+}
+
+.heart {
+  display: inline-block;
 }
