@@ -55,8 +55,6 @@ const Search = () => {
     bookmarkedMovies.forEach((bookmark) => apiData.forEach((api) => JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiData, bookmarkedMovies])
 
-  console.log(bookmarkIdList)
-
   const handleMovieClick = (movie : IMovieData) => {
     setOpenModal(true)
     setClickedMovie(movie)
