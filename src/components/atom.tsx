@@ -1,8 +1,30 @@
 import { atom } from "recoil"
 import { IMovieData } from "./types/movie.d"
+import { recoilPersist } from 'recoil-persist'
 
-export const ClickedDataAtom = atom<IMovieData>({
-  key: 'clickeddata',
+const { persistAtom } = recoilPersist({
+  key: 'storeDatas',
+  storage: sessionStorage,
+})
+
+export const SearchTitleAtom = atom({
+  key: 'searchData',
+  default: ''
+})
+
+export const ClickedMovieDataAtom = atom<IMovieData>({
+  key: 'clickedMovieData',
+  default: {
+    Title: '',
+    Year: '',
+    imdbID: '',
+    Type: '',
+    Poster: '',
+  }
+})
+
+export const ClickedBookMarkDataAtom = atom<IMovieData>({
+  key: 'clickedBookmarkData',
   default: {
     Title: '',
     Year: '',
@@ -13,12 +35,13 @@ export const ClickedDataAtom = atom<IMovieData>({
 })
 
 export const BookMarkDataAtom = atom<IMovieData[]>({
-  key: 'bookmarkdata',
+  key: 'bookmarkData',
   default: [{
     Title: '',
     Year: '',
     imdbID: '',
     Type: '',
     Poster: '',
-  }]
+  }],
+  effects_UNSTABLE: [persistAtom]
 })

@@ -3,7 +3,7 @@ import {useState} from 'hooks'
 import React, { Dispatch, SetStateAction } from 'react'
 
 interface Props {
-  setSearchTitle:  Dispatch<SetStateAction<string>>,
+  setSearchTitle:  Dispatch<SetStateAction<string>>
 }
 
 const Header = ({setSearchTitle} : Props) => {
@@ -13,16 +13,16 @@ const Header = ({setSearchTitle} : Props) => {
     setInputTitle(e.currentTarget.value)
   } 
 
-  const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSearchTitle(inputTitle)
-    setInputTitle('')
-  }
-
   const handleTitleClick = () => {
     setSearchTitle(inputTitle)
     setInputTitle('')
   }
+
+  const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleTitleClick()
+  }
+
 
   return (
     <header className={styles.header}>

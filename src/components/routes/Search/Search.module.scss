@@ -9,6 +9,26 @@
   background: $HEADER;
 }
 
+.defaultStyle {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-y: scroll;
+  color: $WHITE;
+  background: $BACKGROUND;
+  border-radius: 20px;
+}
+
+.loading {
+  font-size: 500px;
+}
+
 .header {
   position: absolute;
   z-index: 80;
@@ -34,7 +54,7 @@
   padding-left: 10px;
   color: $WHITE;
   background: $INPUTBACKGROUND;
-  border-radius: 8px 0 0 8px;
+  border-radius: 20px 0 0;
 
   &::placeholder {
     color: $PLACEHOLDER;
@@ -47,7 +67,7 @@
   color: $WHITE;
   background: $INPUTBTN;
   border-left: 2px solid $BTNBORDER;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 20px 0 0;
 }
 
 .nav {
@@ -69,10 +89,12 @@
 .searchTab {
   @include tab;
   background: $INPUTBACKGROUND;
+  border-radius: 0 0 0 20px;
 }
 
 .bookmarkTab {
   @include tab;
+  border-radius: 0 0 20px;
 }
 
 .section {

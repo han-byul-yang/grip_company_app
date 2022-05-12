@@ -17,3 +17,5 @@ const Tabs = () => {
 }
 
 export default Tabs
+
+// navLink 쓸 수 있음 

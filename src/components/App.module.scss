@@ -13,5 +13,13 @@
   overflow-y: scroll;
   color: $WHITE;
   background: $BACKGROUND;
-  border-radius: 25px;
+  border-radius: 20px;
+
+  &::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+    background: $GREEN;
+  }
 }
+
+// default css 값을 넣는 위치도 확인
