@@ -1,12 +1,15 @@
 import styles from './Search.module.scss'
 import {useState} from 'hooks'
 import React, { Dispatch, SetStateAction } from 'react'
+import { IMovieData } from 'components/types/movie'
 
 interface Props {
   setSearchTitle:  Dispatch<SetStateAction<string>>
+  callWithTitleApi: Function,
+  setApiData: Dispatch<SetStateAction<IMovieData[]>>
 }
 
-const Header = ({setSearchTitle} : Props) => {
+const Header = ({setSearchTitle, callWithTitleApi, setApiData} : Props) => {
   const [inputTitle, setInputTitle] = useState('')
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +18,8 @@ const Header = ({setSearchTitle} : Props) => {
 
   const handleTitleClick = () => {
     setSearchTitle(inputTitle)
-    setInputTitle('')
+    // setInputTitle('')
+    callWithTitleApi()
   }
 
   const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

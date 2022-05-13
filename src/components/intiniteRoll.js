@@ -42,7 +42,7 @@ const Infinite = () => {
   return (
     <>
       {apiData.map((v) => {
-          return (<div>{v.Title}</div>)
+          return (<div key={v.Title}>{v.Title}</div>)
         })}
       <div ref={setTarget} className="Target-Element">
         {isLoaded && <div>loading</div>}
