@@ -7,6 +7,12 @@
   color: $BLACK;
   border: 1px solid $BLACK;
   border-radius: 8px;
+
+  &:hover {
+    color: $WHITE;
+    background: $BLACK;
+    transition: all 0.3s linear;
+  }
 }
 
 .modalBackground {
