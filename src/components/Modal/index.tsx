@@ -11,24 +11,27 @@ interface propsType {
   openModal: boolean
   setOpenModal: Dispatch<SetStateAction<boolean>>
   state: string
+  bookmarkIdList?: string[] | undefined
 }
 
-const BookMarkModal = ({ openModal, setOpenModal, state }: propsType) => {
+const BookMarkModal = ({ openModal, setOpenModal, state, bookmarkIdList }: propsType) => {
   const clickedMovie: IMovieData = useRecoilValue(ClickedMovieDataAtom)
   const clickedBookmark: IMovieData = useRecoilValue(ClickedBookMarkDataAtom)
-  const setBookmarkMovie = useSetRecoilState(BookMarkListAtom)
+  const setBookmarkList = useSetRecoilState(BookMarkListAtom)
 
   const handleCloseModal = () => {
     setOpenModal(false)
   }
 
   const handleAddBookmarkClick = () => {
-    setBookmarkMovie((prevState) => [clickedMovie, ...prevState])
+    if (bookmarkIdList?.indexOf(clickedMovie.imdbID) === -1) {
+      setBookmarkList((prevState) => [clickedMovie, ...prevState])
+    }
     handleCloseModal()
   }
 
   const handleDeleteBookmarkClick = () => {
-    setBookmarkMovie((prevState) => prevState.filter((ele) => ele.imdbID !== clickedBookmark.imdbID))
+    setBookmarkList((prevState) => prevState.filter((ele) => ele.imdbID !== clickedBookmark.imdbID))
     handleCloseModal()
   }
 
@@ -69,4 +72,4 @@ const BookMarkModal = ({ openModal, setOpenModal, state }: propsType) => {
 export default BookMarkModal
 
 // 파일 import 순서 정렬 *
-// setBookmarkMovie 빈배열 들어가는 문제 해결(bookmarkMovie.length === 0이면 nobookmark로 상태 바꿔줬음) *
+// setBookmarkList 빈배열 들어가는 문제 해결(bookmarkMovie.length === 0이면 nobookmark로 상태 바꿔줬음) *

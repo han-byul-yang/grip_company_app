@@ -16,5 +16,5 @@ const Router = () => {
 
 export default Router
 
-// router 구조 확실히 알고 고치기
+// router 구조 확실히 알고 고치기 *
 // head 대신에 GNB

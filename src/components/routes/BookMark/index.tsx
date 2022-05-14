@@ -64,7 +64,7 @@ export default BookMark
 
 // Tab를 router안에 집어 넣을 수 있는지 확인
 // bookmark bookMark 통일
-// search component의 styles랑 겹치는 문제 해결
+// search component의 styles랑 겹치는 문제 해결 *
 // suspense 넣기
 // section에 scss 추가해주기
-// movie list 분리
+// movie list 분리 *

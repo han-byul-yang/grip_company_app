@@ -94,7 +94,7 @@ const Search = () => {
         <nav className={styles.nav}>
           <Tabs />
         </nav>
-        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
+        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' bookmarkIdList={bookmarkIdList} />
       </Suspense>
     </div>
   )
