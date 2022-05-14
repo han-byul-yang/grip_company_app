@@ -6,12 +6,17 @@ import cx from 'classnames'
 import styles from './MovieCards.module.scss'
 import {ClickedMovieDataAtom, ClickedBookMarkDataAtom} from '../../utils/atom' 
 import { IMovieData } from 'types/movie'
+import React, { Dispatch, SetStateAction } from 'react'
 
 interface CardsProps {
-
+  movie: IMovieData
+  setOpenModal: Dispatch<SetStateAction<boolean>>
+  state: string
+  bookmarkIdList?: string[] | undefined
+  handleDrag?: any
 }
 
-const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :any) => {
+const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :CardsProps) => {
   const setClickedMovie = useSetRecoilState(ClickedMovieDataAtom)
   const setClickedBookmark = useSetRecoilState(ClickedBookMarkDataAtom)
 
@@ -22,8 +27,7 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :an
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <li className={styles.eachResult} ref={handleDrag?.innerRef} {...handleDrag?.draggableProps} {...handleDrag?.dragHandleProps} onClick={() => handleMovieClick(movie)}>
+    <li className={styles.eachResult} ref={handleDrag?.innerRef} {...handleDrag?.draggableProps} {...handleDrag?.dragHandleProps} onClick={() => handleMovieClick(movie)} aria-hidden>
       <img src={movie.Poster} alt='movie poster'/>
       <div className={styles.contents}>
         <div className={styles.title}>{movie.Title}</div>
@@ -31,13 +35,11 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :an
         <span className={styles.year}>{movie.Year}</span>
         {
         state === 'search' && 
-        <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList.indexOf(movie.imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
+        <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList?.indexOf(movie.imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
         }
       </div>
     </li>
   )
 }
 
-export default MovieCards
-
-// props typescript
+export default React.memo(MovieCards)

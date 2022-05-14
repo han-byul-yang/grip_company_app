@@ -10,7 +10,7 @@
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
-  overflow-y: scroll;
+  overflow-y: auto !important;
   color: $WHITE;
   background: $BACKGROUND;
   border-radius: 20px;

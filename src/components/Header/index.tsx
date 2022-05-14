@@ -40,5 +40,5 @@ const Header = ({setSearchTitle, setPage, setApiMovieData} : Props) => {
 export default Header
 
 // 반응형으로 만들기 *
-// useState 요소를 props로 넘겨주는 게 나을지 recoil에 저장해서 index 로 부르는 게 나을지 생각
+// useState 요소를 props로 넘겨주는 게 나을지 recoil에 저장해서 index 로 부르는 게 나을지 생각 x
 // handleTitleSubmit 이랑 handleTitleClick 이 중복발생 *

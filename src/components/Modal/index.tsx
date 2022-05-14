@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useCallback } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import cx from 'classnames'
 
@@ -37,8 +37,7 @@ const BookMarkModal = ({ openModal, setOpenModal, state, bookmarkIdList }: props
 
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div className={cx(styles.modalBackground, { [styles.unShow]: !openModal })} onClick={handleCloseModal} />
+      <div className={cx(styles.modalBackground, { [styles.unShow]: !openModal })} onClick={handleCloseModal} aria-hidden />
       <div className={cx(styles.modalBox, { [styles.show]: openModal })}>
         <div className={styles.modal}>
           <div className={styles.head}>{state === 'forBookmark' ? 'BOOKMARK' : 'DELETE'}</div>
@@ -69,7 +68,8 @@ const BookMarkModal = ({ openModal, setOpenModal, state, bookmarkIdList }: props
   )
 }
 
-export default BookMarkModal
+export default React.memo(BookMarkModal)
 
 // 파일 import 순서 정렬 *
 // setBookmarkList 빈배열 들어가는 문제 해결(bookmarkMovie.length === 0이면 nobookmark로 상태 바꿔줬음) *
+// useCallback 넣을지 말지 고민

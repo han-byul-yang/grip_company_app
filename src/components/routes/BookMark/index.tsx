@@ -1,4 +1,4 @@
-import { useState, useEffect } from "hooks"
+import { useState, useEffect, useCallback } from "hooks"
 import { useRecoilState } from "recoil"
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd"
 
@@ -18,9 +18,8 @@ const BookMark = () => {
     setNoBookmark(bookmarkedMovies.length === 0)
   }, [bookmarkedMovies])
 
-  const handleDragEnd = ({destination, source}: DropResult) => {
+  const handleDragEnd = useCallback(({destination, source}: DropResult) => {
     if (!destination)  return
-
     setBookmarkedMovies((prevState) => {
       const copyMovie = [...prevState]
       const itemMove = copyMovie[source.index]
@@ -28,7 +27,7 @@ const BookMark = () => {
       copyMovie.splice(destination.index, 0, itemMove)
       return copyMovie
   })
-  }
+  }, [setBookmarkedMovies])
 
   return (
     <div className={styles.defaultStyle}>
