@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import styles from './Tabs.module.scss'
+import styles from './tabs.module.scss'
 
 const Tabs = () => {
   return (

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import cx from 'classnames'
 
-import styles from './MovieCards.module.scss'
+import styles from './movieCards.module.scss'
 import {ClickedMovieDataAtom, ClickedBookMarkDataAtom} from '../../utils/atom' 
 import { IMovieData } from 'types/movie'
 import React, { Dispatch, SetStateAction } from 'react'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'hooks'
 import { Suspense } from 'react'
 
-import styles from "./Search.module.scss"
+import styles from "./search.module.scss"
 import { MovieApi } from 'utils/movieApi'
 import { IMovieData } from "types/movie"
 
@@ -11,7 +11,7 @@ import Tabs from "../../Tabs"
 import { useRecoilValue } from 'recoil'
 import { BookMarkListAtom } from 'utils/atom'
 import Loading from 'components/Loading/Loading'
-import MovieCards from 'components/movieCards'
+import MovieCards from 'components/MovieCards'
 
 const Search = () => {
   const [apiMovieData, setApiMovieData] = useState<IMovieData[]>([])

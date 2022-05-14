@@ -7,7 +7,7 @@ import { BookMarkListAtom} from "utils/atom"
 
 import Tabs from "../../Tabs"
 import BookMarkModal from "../../Modal"
-import MovieCards from "components/movieCards"
+import MovieCards from "components/MovieCards"
 
 const BookMark = () => {
   const [openModal, setOpenModal] = useState(false)

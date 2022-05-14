@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import {useState} from 'hooks'
 
-import styles from './Header.module.scss'
+import styles from './header.module.scss'
 import { IMovieData } from 'types/movie'
 
 interface Props {

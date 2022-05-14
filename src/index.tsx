@@ -16,7 +16,7 @@ root.render(
         <Router />
       </ MobileView>
       <BrowserView>
-        <div style={{fontSize: '50px'}}>모바일 버전에서 확인해주세요</div>
+        <div style={{fontSize: '50px'}}>모바일 뷰 버전에서 확인해주세요</div>
       </BrowserView>
     </RecoilRoot>
   </React.StrictMode>

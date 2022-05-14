@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useCallback } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import cx from 'classnames'
 
-import styles from './Modal.module.scss'
+import styles from './modal.module.scss'
 
 import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../../utils/atom'
 import { IMovieData } from 'types/movie'
