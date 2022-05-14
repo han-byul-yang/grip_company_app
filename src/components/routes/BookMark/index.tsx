@@ -65,5 +65,5 @@ export default BookMark
 // bookmark bookMark 통일
 // search component의 styles랑 겹치는 문제 해결 *
 // suspense 넣기
-// section에 scss 추가해주기
+// section에 scss 추가해주기 *
 // movie list 분리 *

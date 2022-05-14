@@ -33,6 +33,7 @@ const Search = () => {
       if (res.data.Response === 'False') {
         setNoMovie(true)
       } else {
+        console.log(res.data.Search)
         setApiMovieData((prevState) => [...prevState,...res.data.Search])
         setTotalResult(parseInt(res.data.totalResults, 10))
         setNoMovie(false)
