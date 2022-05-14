@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import styles from './Search.module.scss'
+import styles from './Tabs.module.scss'
 
 const Tabs = () => {
   return (

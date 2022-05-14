@@ -1,12 +1,12 @@
-import Tabs from "../Search/Tabs"
+import Tabs from "../../Tabs/Tabs"
 import { useState, useEffect } from "hooks"
 import { useSetRecoilState, useRecoilState } from "recoil"
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd"
 
 import { BookMarkListAtom, ClickedBookMarkDataAtom } from "components/atom"
 import styles from './bookmark.module.scss'
-import BookMarkModal from "../Modal/BookMarkModal"
-import { IMovieData } from "components/types/movie"
+import BookMarkModal from "../../Modal/BookMarkModal"
+import { IMovieData } from "types/movie"
 
 const BookMark = () => {
   const [openModal, setOpenModal] = useState(false)

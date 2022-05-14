@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import BookMark from './routes/BookMark'
-import Search from './routes/Search'
+import BookMark from './BookMark'
+import Search from './Search'
 
 const Router = () => {
     return (

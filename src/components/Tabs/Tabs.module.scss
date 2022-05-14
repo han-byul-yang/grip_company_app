@@ -1,0 +1,26 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  height: 50px;
+}
+
+.tabBtn {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  border-top: 3px solid $INPUTBACKGROUND;
+}
+
+.searchTab {
+  @include tab;
+  background: $INPUTBACKGROUND;
+  border-radius: 0 0 0 20px;
+}
+
+.bookmarkTab {
+  @include tab;
+  border-radius: 0 0 20px;
+}

@@ -1,4 +1,4 @@
-import Router from "./Router"
+import Router from "./routes"
 import styles from './App.module.scss'
 import { MobileView, BrowserView } from "react-device-detect"
 

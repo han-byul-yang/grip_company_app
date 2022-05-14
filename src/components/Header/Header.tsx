@@ -1,15 +1,14 @@
-import styles from './Search.module.scss'
-import {useState} from 'hooks'
 import React, { Dispatch, SetStateAction } from 'react'
-import { IMovieData } from 'components/types/movie'
+import {useState} from 'hooks'
+
+import styles from './Header.module.scss'
 
 interface Props {
   setSearchTitle:  Dispatch<SetStateAction<string>>
-  callWithTitleApi: Function,
-  setApiData: Dispatch<SetStateAction<IMovieData[]>>
+  setPage: Dispatch<SetStateAction<number>>
 }
 
-const Header = ({setSearchTitle, callWithTitleApi, setApiData} : Props) => {
+const Header = ({setSearchTitle, setPage} : Props) => {
   const [inputTitle, setInputTitle] = useState('')
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +17,8 @@ const Header = ({setSearchTitle, callWithTitleApi, setApiData} : Props) => {
 
   const handleTitleClick = () => {
     setSearchTitle(inputTitle)
-    // setInputTitle('')
-    callWithTitleApi()
+    setInputTitle('') // 여기를 ''로 했는데 어떻게 결과가 계속 나오지
+    setPage(1)
   }
 
   const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

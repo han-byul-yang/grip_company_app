@@ -6,7 +6,6 @@ import App from './components/App'
 import {BrowserView, MobileView} from 'react-device-detect'
 import {RecoilRoot} from 'recoil'
 import { BrowserRouter } from 'react-router-dom'
-import Infinite from 'components/intiniteRoll'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

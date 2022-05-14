@@ -5,14 +5,14 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import cx from 'classnames'
 
 import styles from "./Search.module.scss"
-import { MovieApi } from "components/services/MovieApi"
-import { IMovieData } from "components/types/movie"
+import { MovieApi } from "components/Utils/MovieApi"
+import { IMovieData } from "types/movie"
 
-import BookMarkModal from "../Modal/BookMarkModal"
-import Header from "./Header"
-import Tabs from "./Tabs"
+import BookMarkModal from "../../Modal/BookMarkModal"
+import Header from "../../Header/Header"
+import Tabs from "../../Tabs/Tabs"
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { BookMarkListAtom, ClickedMovieDataAtom } from 'components/atom'
+import { BookMarkListAtom, ClickedMovieDataAtom } from 'components/Utils/atom'
 import Loading from 'components/Loading'
 
 const Search = () => {
@@ -27,8 +27,7 @@ const Search = () => {
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
   const [isLoading, setisLoading] = useState(false)
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     MovieApi({
       s: searchTitle,
       page
@@ -42,31 +41,13 @@ const Search = () => {
       }).catch((error) => {
         console.log(error.message)
     })
-  }
-  , [page, searchTitle])
-
-  const callWithTitleApi = useCallback( async () => {
-    setPage(1)
-    await MovieApi({
-      s: searchTitle,
-      page
-    }).then((res) => {
-      if (res.data.Response === 'False') {
-        setNoMovie(true)
-      } else {
-        setApiData(res.data.Search)
-        setNoMovie(false)
-      }
-      }).catch((error) => {
-        console.log(error.message)
-    })
-  },[searchTitle])
-
-  /* if (!apiData) return null */
+  }, [page, searchTitle])
 
   useEffect(() => {
-    setBookmarkIdList([])
-    bookmarkedMovies.forEach((bookmark) => apiData.forEach((api) => JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
+    setBookmarkIdList([]) // 이름 직관적으로 변경 필요
+    bookmarkedMovies.forEach((bookmark) => 
+    apiData.forEach((api) => 
+    JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiData, bookmarkedMovies])
 
   const handleMovieClick = (movie : IMovieData) => {
@@ -79,18 +60,16 @@ const Search = () => {
     new Promise((res) => setTimeout(res, 4000))
 
   useEffect(() => {
-    let observer: any
+    let observer: IntersectionObserver
     if (target) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (!entry.isIntersecting) return
         setisLoading(true)
         await testFetch()
-        observer.unobserve(entry.target)
-        console.log(page)
-        setPage(prevState => prevState + 1)
-        console.log('api done')
+        observer.unobserve(entry.target) // 새로 target이 설정되는 게 아니기 때문에 사실상 여기서는 필요 x
+        setPage(prevState => prevState + 1) 
         setisLoading(false)
-        observer.observe(target)
+        observer.observe(target) // 새로 target이 설정되는 게 아니기 때문에 사실상 여기서는 필요 x
       }, {
         threshold: 1,
       })
@@ -102,7 +81,7 @@ const Search = () => {
   return (
     <div>
       <Suspense fallback={<Loading />}>
-        <Header setSearchTitle={setSearchTitle} callWithTitleApi={callWithTitleApi} setApiData={setApiData} />
+        <Header setSearchTitle={setSearchTitle} setPage={setPage} />
         <section className={styles.section}>
           {
           noMovie ?
@@ -120,7 +99,7 @@ const Search = () => {
                       <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList.indexOf(movie.imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
                     </div>
                   </li>)}
-                <div className="lastMovie" ref={setTarget}>{isLoading ? <div className={styles.loading}>Loading</div> : ''}</div>
+                <div className="lastMovie" ref={setTarget}>{isLoading && <div className={styles.loading}>loading</div>}</div>
               </ul> 
             </Suspense>
           }
@@ -146,6 +125,10 @@ export default Search
 // input으로 검색어 바꾸면 apiData 리스트도 삭제
 // api불러올 때 마다 list에 데이터를 추가해주면 다른 검색어 일 때 결과 데이터가 붙어서 나옴
 // 즐겨찾기 중복 알림
+// 로딩 시 탭 사라짐 현상
+// 무한 로딩 css
+// 페이지 제한 
+  /* if (!apiData) return null */
 
   //  const handleWindowScroll = () => {
   //   setScrollLocation(window.scrollY)

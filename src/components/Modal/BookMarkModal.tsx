@@ -4,8 +4,8 @@ import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import styles from './Modal.module.scss'
 
-import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../../atom'
-import { IMovieData } from 'components/types/movie'
+import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../atom'
+import { IMovieData } from 'types/movie'
 
 interface propsType {
   openModal: boolean

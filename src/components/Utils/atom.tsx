@@ -1,5 +1,5 @@
 import { atom } from "recoil"
-import { IMovieData } from "./types/movie.d"
+import { IMovieData } from "types/movie"
 import { recoilPersist } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist({

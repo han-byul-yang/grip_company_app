@@ -1,5 +1,5 @@
 import { axios } from 'hooks/worker'
-import { ISearchData } from '../types/movie.d'
+import { ISearchData } from 'types/movie'
 
 const MOVIE_BASE_URL = 'http://www.omdbapi.com'
 const REST_API_KEY = process.env.REACT_APP_REST_API_KEY
@@ -17,4 +17,4 @@ export const MovieApi = (params: Params) =>
   },
   })
 
-  // api key 따로 관리 오류
+  // api key 따로 관리 오류 *
