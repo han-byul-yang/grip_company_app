@@ -15,21 +15,20 @@ root.render(
       <MobileView>
         <Router />
       </ MobileView>
-      <BrowserView>모바일 버전에서 확인해주세요</BrowserView>
+      <BrowserView>
+        <div style={{fontSize: '50px'}}>모바일 버전에서 확인해주세요</div>
+      </BrowserView>
     </RecoilRoot>
   </React.StrictMode>
 )
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals()
 
-// 파일 구조 정리
-// import 나열 순서 정리
-// 최적화
+// 파일 구조 정리 *
+// import 나열 순서 정리 *
+// 최적화 *
 // 리드미 작성
-// 브라우저 버전 글 화면 띄워주기
+// 브라우저 버전 글 화면 띄워주기 *
 
 // 즐겨찾기 삭제 창 띄워주기
 // 무한 스크롤링

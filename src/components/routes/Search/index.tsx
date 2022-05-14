@@ -33,7 +33,6 @@ const Search = () => {
       if (res.data.Response === 'False') {
         setNoMovie(true)
       } else {
-        console.log(res.data.Search)
         setApiMovieData((prevState) => [...prevState,...res.data.Search])
         setTotalResult(parseInt(res.data.totalResults, 10))
         setNoMovie(false)
@@ -109,7 +108,7 @@ export default Search
 // title recoil에 저장해서 탭 이동 후 검색 결과 유지되게 해주기 x
 // api error 제대로 처리해주기 *
 // api 계속 불러오는 거 처리해줘야함 *
-// 이미지나 title 을 불러오지 못할 때 처리(대신 이미지도)
+// 이미지나 title 을 불러오지 못할 때 처리(대신 이미지도) *
 // lazy를 사용해줄 수 있을 것 
 // suspense 로 로딩 넣기(로딩 css 만들어주기)
 // 로딩 시 탭 사라짐 현상
