@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/grip-movie-app/static/css/main.3dc4a365.css",
-    "main.js": "/grip-movie-app/static/js/main.9b3fc1e5.js",
+    "main.css": "/grip-movie-app/static/css/main.43c476d4.css",
+    "main.js": "/grip-movie-app/static/js/main.73bcea63.js",
     "static/js/787.68ea1acb.chunk.js": "/grip-movie-app/static/js/787.68ea1acb.chunk.js",
     "index.html": "/grip-movie-app/index.html",
-    "main.3dc4a365.css.map": "/grip-movie-app/static/css/main.3dc4a365.css.map",
-    "main.9b3fc1e5.js.map": "/grip-movie-app/static/js/main.9b3fc1e5.js.map",
+    "main.43c476d4.css.map": "/grip-movie-app/static/css/main.43c476d4.css.map",
+    "main.73bcea63.js.map": "/grip-movie-app/static/js/main.73bcea63.js.map",
     "787.68ea1acb.chunk.js.map": "/grip-movie-app/static/js/787.68ea1acb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dc4a365.css",
-    "static/js/main.9b3fc1e5.js"
+    "static/css/main.43c476d4.css",
+    "static/js/main.73bcea63.js"
   ]
 }
