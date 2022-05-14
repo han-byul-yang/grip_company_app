@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'hooks'
 import { Suspense } from 'react'
-import { useInView } from 'react-intersection-observer'
 
 import styles from "./search.module.scss"
 import { MovieApi } from 'utils/movieApi'
@@ -9,8 +8,8 @@ import { IMovieData } from "types/movie"
 import BookMarkModal from "../../components/Modal"
 import Header from "../../components/Header"
 import Tabs from "../../components/Tabs"
-import { useRecoilValue } from 'recoil'
-import { BookMarkListAtom } from 'utils/atom'
+import { useRecoilValue, useRecoilState } from 'recoil'
+import { BookMarkListAtom, BookMarkIdListAtom } from 'utils/atom'
 import Loading from 'components/Loading/Loading'
 import MovieCards from 'components/MovieCards'
 
@@ -20,9 +19,9 @@ const Search = () => {
   const [searchTitle, setSearchTitle] = useState('')
   const [openModal, setOpenModal] = useState(false)
   const [noMovie, setNoMovie] = useState(true)
-  const [bookmarkIdList, setBookmarkIdList] = useState<string[]>([])
   const [page, setPage] = useState(1)
   const bookmarkedMovies = useRecoilValue(BookMarkListAtom)
+  const [bookmarkIdList, setBookmarkIdList] = useRecoilState(BookMarkIdListAtom)
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
   const [isLoading, setisLoading] = useState(false)
 
@@ -41,14 +40,17 @@ const Search = () => {
       }).catch((error) => {
         return error.message
     })
-  }, [searchTitle, page])
+  }, [page, searchTitle])
 
   useEffect(() => {
-    setBookmarkIdList([])
     bookmarkedMovies.forEach((bookmark) => 
     apiMovieData.forEach((api) => 
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
-  },[apiMovieData, bookmarkedMovies])
+  },[apiMovieData, bookmarkedMovies, setBookmarkIdList])
+
+  const testFetch = () =>
+    // eslint-disable-next-line no-promise-executor-return
+    new Promise((res) => setTimeout(res, 3000))
 
   useEffect(() => {
     let observer: IntersectionObserver
@@ -57,9 +59,8 @@ const Search = () => {
         if (!entry.isIntersecting || totalResult < (page * 10)) return
         observer.unobserve(entry.target)
         setisLoading(true)
-        setTimeout(() => {
-          setPage((prevState) => prevState + 1)
-        }, 4000)
+        await testFetch()
+        setPage(prevState => prevState + 1) 
         setisLoading(false)
         observer.observe(target)
       }, {
@@ -85,7 +86,7 @@ const Search = () => {
               <ul className={styles.resultList}>
                 {
                 apiMovieData.map((movie) => 
-                  <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} bookmarkIdList={bookmarkIdList}  state='search' />
+                  <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} state='search' />
                   )}
               </ul> 
               {isLoading && <Loading />}
@@ -96,7 +97,7 @@ const Search = () => {
         <nav className={styles.nav}>
           <Tabs />
         </nav>
-        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' bookmarkIdList={bookmarkIdList} />
+        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
       </Suspense>
     </div>
   )

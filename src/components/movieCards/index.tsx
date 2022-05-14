@@ -1,10 +1,10 @@
-import {useSetRecoilState} from 'recoil'
+import {useRecoilValue, useSetRecoilState} from 'recoil'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import cx from 'classnames'
 
 import styles from './movieCards.module.scss'
-import {ClickedMovieDataAtom, ClickedBookMarkDataAtom} from '../../utils/atom' 
+import {ClickedMovieDataAtom, ClickedBookMarkDataAtom, BookMarkIdListAtom} from '../../utils/atom' 
 import { IMovieData } from 'types/movie'
 import React, { Dispatch, SetStateAction } from 'react'
 
@@ -14,13 +14,13 @@ interface CardsProps {
   movie: IMovieData
   setOpenModal: Dispatch<SetStateAction<boolean>>
   state: string
-  bookmarkIdList?: string[] | undefined
   handleDrag?: any
 }
 
-const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :CardsProps) => {
+const MovieCards = ({handleDrag, movie, setOpenModal, state} :CardsProps) => {
   const setClickedMovie = useSetRecoilState(ClickedMovieDataAtom)
   const setClickedBookmark = useSetRecoilState(ClickedBookMarkDataAtom)
+  const bookmarkIdList = useRecoilValue(BookMarkIdListAtom)
 
   const {Poster, Title, Type, Year, imdbID} = movie
 
@@ -37,10 +37,7 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :Ca
         <div className={styles.title}>{Title}</div>
         <span className={styles.type}>{Type}</span> |
         <span className={styles.year}>{Year}</span>
-        {
-        state === 'search' && 
         <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList?.indexOf(imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
-        }
       </div>
     </li>
   )

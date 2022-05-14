@@ -7,9 +7,15 @@ const { persistAtom } = recoilPersist({
   storage: sessionStorage,
 })
 
-export const SearchTitleAtom = atom({
-  key: 'searchData',
-  default: ''
+export const BookMarkListAtom = atom<IMovieData[]>({
+  key: 'bookmarkList',
+  default: [],
+  effects_UNSTABLE: [persistAtom]
+})
+
+export const BookMarkIdListAtom = atom<string[]>({
+  key: 'bookmarkIdList',
+  default: []
 })
 
 export const ClickedMovieDataAtom = atom<IMovieData>({
@@ -32,10 +38,4 @@ export const ClickedBookMarkDataAtom = atom<IMovieData>({
     Type: '',
     Poster: '',
   }
-})
-
-export const BookMarkListAtom = atom<IMovieData[]>({
-  key: 'bookmarkList',
-  default: [],
-  effects_UNSTABLE: [persistAtom]
 })

@@ -4,20 +4,20 @@ import cx from 'classnames'
 
 import styles from './modal.module.scss'
 
-import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom } from '../../utils/atom'
+import { BookMarkListAtom, ClickedBookMarkDataAtom, ClickedMovieDataAtom, BookMarkIdListAtom } from '../../utils/atom'
 import { IMovieData } from 'types/movie'
 
 interface propsType {
   openModal: boolean
   setOpenModal: Dispatch<SetStateAction<boolean>>
   state: string
-  bookmarkIdList?: string[] | undefined
 }
 
-const BookMarkModal = ({ openModal, setOpenModal, state, bookmarkIdList }: propsType) => {
+const BookMarkModal = ({ openModal, setOpenModal, state}: propsType) => {
   const clickedMovie: IMovieData = useRecoilValue(ClickedMovieDataAtom)
   const clickedBookmark: IMovieData = useRecoilValue(ClickedBookMarkDataAtom)
   const setBookmarkList = useSetRecoilState(BookMarkListAtom)
+  const bookmarkIdList = useRecoilValue(BookMarkIdListAtom)
 
   const handleCloseModal = () => {
     setOpenModal(false)
