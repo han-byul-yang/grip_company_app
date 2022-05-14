@@ -32,7 +32,7 @@ const BookMark = () => {
   return (
     <div className={styles.defaultStyle}>
       <header>
-        <h1>내 즐겨찾기</h1>
+        <h1 className={styles.title}>내 즐겨찾기</h1>
       </header>
       <DragDropContext onDragEnd={handleDragEnd}>
         <section>

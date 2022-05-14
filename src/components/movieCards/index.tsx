@@ -28,7 +28,7 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, bookmarkIdList} :Ca
 
   return (
     <li className={styles.eachResult} ref={handleDrag?.innerRef} {...handleDrag?.draggableProps} {...handleDrag?.dragHandleProps} onClick={() => handleMovieClick(movie)} aria-hidden>
-      <img src={movie.Poster} alt='movie poster'/>
+      <img src={movie.Poster} className={styles.poster} alt='movie poster'/>
       <div className={styles.contents}>
         <div className={styles.title}>{movie.Title}</div>
         <span className={styles.type}>{movie.Type}</span> |

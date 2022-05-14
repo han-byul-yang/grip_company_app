@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'hooks'
+import { useEffect, useState } from 'hooks'
 import { Suspense } from 'react'
 
 import styles from "./Search.module.scss"
@@ -73,7 +73,7 @@ const Search = () => {
   }, [page, target, totalResult])
 
   return (
-    <div>
+    <div className={styles.defaultStyle}>
       <Suspense fallback={<Loading />}>
         <header className={styles.header}>
           <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
@@ -83,7 +83,7 @@ const Search = () => {
           noMovie ?
             <p>검색 결과가 없습니다</p> :
             <Suspense fallback={<Loading />}>
-              <p>{totalResult} 건의 검색 결과</p>
+              <p className={styles.result}>{totalResult} 건의 검색 결과</p>
               <ul className={styles.resultList}>
                 {
                 apiMovieData.map((movie) => 
