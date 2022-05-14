@@ -1,5 +1,4 @@
 import Router from "./routes"
-import styles from './App.module.scss'
 import { MobileView, BrowserView } from "react-device-detect"
 
 const App = () => {
@@ -14,6 +13,3 @@ const App = () => {
 }
 
 export default App
-
-// 리드미 작성
-// 브라우저 버전 글 화면 띄워주기

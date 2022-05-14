@@ -1,29 +1,24 @@
-import Tabs from "../../Tabs/Tabs"
 import { useState, useEffect } from "hooks"
-import { useSetRecoilState, useRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd"
 
-import { BookMarkListAtom, ClickedBookMarkDataAtom } from "components/atom"
 import styles from './bookmark.module.scss'
-import BookMarkModal from "../../Modal/BookMarkModal"
-import { IMovieData } from "types/movie"
+import { BookMarkListAtom} from "utils/atom"
+
+import Tabs from "../../Tabs"
+import BookMarkModal from "../../Modal"
+import MovieCards from "components/movieCards"
 
 const BookMark = () => {
   const [openModal, setOpenModal] = useState(false)
   const [bookmarkedMovies, setBookmarkedMovies] = useRecoilState(BookMarkListAtom)
-  const setClickedBookmark = useSetRecoilState(ClickedBookMarkDataAtom)
   const [noBookmark, setNoBookmark] = useState(true)
-
-  const handleMovieClick = (movie : IMovieData) => {
-    setOpenModal(true)
-    setClickedBookmark(movie)
-  }
-
+  
   useEffect(() => {
     setNoBookmark(bookmarkedMovies.length === 0)
   }, [bookmarkedMovies])
 
-  const onDragEnd = ({destination, source}: DropResult) => {
+  const handleDragEnd = ({destination, source}: DropResult) => {
     if (!destination)  return
 
     setBookmarkedMovies((prevState) => {
@@ -40,34 +35,26 @@ const BookMark = () => {
       <header>
         <h1>내 즐겨찾기</h1>
       </header>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div>
-          <section>
-            { noBookmark ? 
-              <p>즐겨찾기가 존재하지 않습니다.</p> :
-              <Droppable droppableId="bookmarkDrop">
-                {(handleDrop) => (
-                  <ul className={styles.resultList} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
-                    {bookmarkedMovies.map((movie,idx) =>
-                      <Draggable draggableId={`${movie.imdbID}`} key={`${movie.imdbID}`} index={idx}> 
-                        {(handleDrag) => 
-                        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                          <li key={`movie-${movie.imdbID}`} className={styles.eachResult} ref={handleDrag.innerRef} {...handleDrag.draggableProps} {...handleDrag.dragHandleProps} onClick={() => handleMovieClick(movie)}>
-                            <img src={movie.Poster} alt='movie poster'/>
-                            <div className={styles.contents}>
-                              <div className={styles.title}>{movie.Title}</div>
-                              <span className={styles.type}>{movie.Type}</span> |
-                              <span className={styles.year}>{movie.Year}</span>
-                            </div>
-                          </li>}
-                      </Draggable>)}
-                    {handleDrop.placeholder}
-                  </ul>)}
-              </Droppable>}
-          </section>
-        </div>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <section>
+          { noBookmark ? 
+            <p>즐겨찾기가 존재하지 않습니다.</p> :
+            <Droppable droppableId="bookmarkDrop">
+              {(handleDrop) => (
+                <ul className={styles.resultList} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
+                  {bookmarkedMovies.map((movie,idx) =>
+                    <Draggable draggableId={`${movie.imdbID}`} key={`${movie.imdbID}`} index={idx}> 
+                      {(handleDrag) => 
+                        <MovieCards key={`movie-${movie.imdbID}`} handleDrag={handleDrag} movie={movie} setOpenModal={setOpenModal} state='bookmark' />}
+                    </Draggable>)}
+                  {handleDrop.placeholder}
+                </ul>)}
+            </Droppable>}
+        </section>
       </DragDropContext>
-      <Tabs />
+      <nav className={styles.nav}>
+        <Tabs />
+      </nav>
       <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forDelete' />
     </div>
   )
@@ -80,3 +67,4 @@ export default BookMark
 // search component의 styles랑 겹치는 문제 해결
 // suspense 넣기
 // section에 scss 추가해주기
+// movie list 분리

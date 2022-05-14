@@ -1,9 +1,12 @@
-.nav {
-  position: fixed;
+@import '../../styles/constants/colors';
+
+@mixin tab {
   bottom: 0;
-  z-index: 10;
-  width: 100%;
+  width: 50vw;
   height: 50px;
+  font-size: 16px;
+  color: $WHITE;
+  background: $HEADER;
 }
 
 .tabBtn {

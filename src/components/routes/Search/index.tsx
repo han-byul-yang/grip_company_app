@@ -1,19 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'hooks'
-import { Suspense, useRef } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import cx from 'classnames'
+import { Suspense } from 'react'
 
 import styles from "./Search.module.scss"
-import { MovieApi } from "components/Utils/MovieApi"
+import { MovieApi } from 'utils/movieApi'
 import { IMovieData } from "types/movie"
 
-import BookMarkModal from "../../Modal/BookMarkModal"
-import Header from "../../Header/Header"
-import Tabs from "../../Tabs/Tabs"
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { BookMarkListAtom, ClickedMovieDataAtom } from 'components/Utils/atom'
-import Loading from 'components/Loading'
+import BookMarkModal from "../../Modal"
+import Header from "../../Header"
+import Tabs from "../../Tabs"
+import { useRecoilValue } from 'recoil'
+import { BookMarkListAtom } from 'utils/atom'
+import Loading from 'components/Loading/Loading'
+import MovieCards from 'components/movieCards'
 
 const Search = () => {
   const [apiData, setApiData] = useState<IMovieData[]>([])
@@ -22,7 +20,6 @@ const Search = () => {
   const [noMovie, setNoMovie] = useState(true)
   const [bookmarkIdList, setBookmarkIdList] = useState<string[]>([])
   const [page, setPage] = useState(1)
-  const setClickedMovie = useSetRecoilState(ClickedMovieDataAtom)
   const bookmarkedMovies = useRecoilValue(BookMarkListAtom)
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
   const [isLoading, setisLoading] = useState(false)
@@ -50,11 +47,6 @@ const Search = () => {
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiData, bookmarkedMovies])
 
-  const handleMovieClick = (movie : IMovieData) => {
-    setOpenModal(true)
-    setClickedMovie(movie)
-  }
-
   const testFetch = () =>
     // eslint-disable-next-line no-promise-executor-return
     new Promise((res) => setTimeout(res, 4000))
@@ -81,30 +73,27 @@ const Search = () => {
   return (
     <div>
       <Suspense fallback={<Loading />}>
-        <Header setSearchTitle={setSearchTitle} setPage={setPage} />
+        <header className={styles.header}>
+          <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiData={setApiData} />
+        </header>
         <section className={styles.section}>
           {
           noMovie ?
             <p>검색 결과가 없습니다</p> :
             <Suspense fallback={<Loading />}>
               <ul className={styles.resultList}>
-                {apiData?.map((movie) => 
-                  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                  <li key={movie.imdbID} className={styles.eachResult} onClick={() => handleMovieClick(movie)}>
-                    <img src={movie.Poster} alt='movie poster'/>
-                    <div className={styles.contents}>
-                      <div className={styles.title}>{movie.Title}</div>
-                      <span className={styles.type}>{movie.Type}</span> |
-                      <span className={styles.year}>{movie.Year}</span>
-                      <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList.indexOf(movie.imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
-                    </div>
-                  </li>)}
+                {
+                apiData?.map((movie) => 
+                  <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} bookmarkIdList={bookmarkIdList}  state='search' />
+                  )}
                 <div className="lastMovie" ref={setTarget}>{isLoading && <div className={styles.loading}>loading</div>}</div>
               </ul> 
             </Suspense>
           }
         </section>
-        <Tabs />
+        <nav className={styles.nav}>
+          <Tabs />
+        </nav>
         <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
       </Suspense>
     </div>
@@ -118,16 +107,16 @@ export default Search
 // api 계속 불러오는 거 처리해줘야함 
 // 이미지나 title 을 불러오지 못할 때 처리(대신 이미지도)
 // 재로딩이 계속 되니까 title을 recoil로 처리 해줘야 하나
-// 이 컴포넌트에 head랑 footer태그를 같이 넣어줘야 할까
+// 이 컴포넌트에 head랑 footer태그를 같이 넣어줘야 할까 *
 // suspense 로 로딩 넣기(로딩 css 만들어주기)
 // 검색 결과 몇 건 삭제하거나 기능구현
 // lazy를 사용해줄 수 있을 것 
-// input으로 검색어 바꾸면 apiData 리스트도 삭제
-// api불러올 때 마다 list에 데이터를 추가해주면 다른 검색어 일 때 결과 데이터가 붙어서 나옴
+// input으로 검색어 바꾸면 apiData 리스트도 삭제 *
+// api불러올 때 마다 list에 데이터를 추가해주면 다른 검색어 일 때 결과 데이터가 붙어서 나옴 *
 // 즐겨찾기 중복 알림
 // 로딩 시 탭 사라짐 현상
 // 무한 로딩 css
-// 페이지 제한 
+// 페이지수  한계 api 제한 
   /* if (!apiData) return null */
 
   //  const handleWindowScroll = () => {

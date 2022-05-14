@@ -1,17 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import {BrowserView, MobileView} from 'react-device-detect'
+
 import './styles/index.scss'
 import reportWebVitals from './reportWebVitals'
-import App from './components/App'
-import {BrowserView, MobileView} from 'react-device-detect'
+
 import {RecoilRoot} from 'recoil'
-import { BrowserRouter } from 'react-router-dom'
+import Router from 'components/routes'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <App />
+      <MobileView>
+        <Router />
+      </ MobileView>
+      <BrowserView>모바일 버전에서 확인해주세요</BrowserView>
     </RecoilRoot>
   </React.StrictMode>
 )
@@ -24,6 +28,8 @@ reportWebVitals()
 // 파일 구조 정리
 // import 나열 순서 정리
 // 최적화
+// 리드미 작성
+// 브라우저 버전 글 화면 띄워주기
 
 // 즐겨찾기 삭제 창 띄워주기
 // 무한 스크롤링
