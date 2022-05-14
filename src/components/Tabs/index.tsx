@@ -1,19 +1,19 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styles from './Tabs.module.scss'
 
 const Tabs = () => {
   return (
     <div className={styles.tabBtn}>
-      <Link to="/">
-        <button className={styles.searchTab} type="button">영화 검색</button>
-      </Link>
-      <Link to="/bookmark">
-        <button className={styles.bookmarkTab} type="button">즐겨찾기</button>
-      </Link>
+      <NavLink to="/">
+        {({isActive}) => <button className={isActive ? styles.searchActive : styles.searchNonActive} type="button">영화 검색</button>}
+      </NavLink>
+      <NavLink to="/bookmark">
+        {({isActive}) => <button className={isActive ? styles.bookmarkActive : styles.bookmarkNonActive} type="button">즐겨찾기</button>}
+      </NavLink>
     </div>
   )
 }
 
 export default Tabs
 
-// navLink 쓸 수 있음 
+// navLink 쓸 수 있음 *

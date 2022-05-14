@@ -2,11 +2,22 @@
 
 @mixin tab {
   bottom: 0;
+  z-index: 25;
   width: 50vw;
   height: 50px;
   font-size: 16px;
   color: $WHITE;
   background: $HEADER;
+}
+
+@mixin tabActive {
+  @include tab;
+  background: $HEADER;
+}
+
+@mixin tabNonActive {
+  @include tab;
+  background: $INPUTBACKGROUND;
 }
 
 .tabBtn {
@@ -17,13 +28,22 @@
   border-top: 3px solid $INPUTBACKGROUND;
 }
 
-.searchTab {
-  @include tab;
-  background: $INPUTBACKGROUND;
+.searchActive {
+  @include tabActive;
   border-radius: 0 0 0 20px;
 }
 
-.bookmarkTab {
-  @include tab;
+.searchNonActive {
+  @include tabNonActive;
+  border-radius: 0 0 0 20px;
+}
+
+.bookmarkActive {
+  @include tabActive;
+  border-radius: 0 0 20px;
+}
+
+.bookmarkNonActive {
+  @include tabNonActive;
   border-radius: 0 0 20px;
 }
