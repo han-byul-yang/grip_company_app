@@ -17,5 +17,3 @@ export const MovieApi = (params: Params) =>
       ...params
   },
   })
-
-  // api key 따로 관리 오류 *

@@ -20,22 +20,10 @@ export const BookMarkIdListAtom = atom<string[]>({
 
 export const ClickedMovieDataAtom = atom<IMovieData>({
   key: 'clickedMovieData',
-  default: {
-    Title: '',
-    Year: '',
-    imdbID: '',
-    Type: '',
-    Poster: '',
-  }
+  default: {Title: '', Year: '', imdbID: '', Type: '', Poster: ''}
 })
 
 export const ClickedBookMarkDataAtom = atom<IMovieData>({
   key: 'clickedBookmarkData',
-  default: {
-    Title: '',
-    Year: '',
-    imdbID: '',
-    Type: '',
-    Poster: '',
-  }
+  default: {Title: '', Year: '', imdbID: '', Type: '', Poster: ''}
 })

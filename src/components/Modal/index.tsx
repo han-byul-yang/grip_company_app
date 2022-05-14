@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useCallback } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import cx from 'classnames'
 
@@ -19,9 +19,9 @@ const BookMarkModal = ({ openModal, setOpenModal, state}: propsType) => {
   const setBookmarkList = useSetRecoilState(BookMarkListAtom)
   const bookmarkIdList = useRecoilValue(BookMarkIdListAtom)
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setOpenModal(false)
-  }
+  }, [setOpenModal])
 
   const handleAddBookmarkClick = () => {
     if (bookmarkIdList?.indexOf(clickedMovie.imdbID) === -1) {
@@ -30,10 +30,10 @@ const BookMarkModal = ({ openModal, setOpenModal, state}: propsType) => {
     handleCloseModal()
   }
 
-  const handleDeleteBookmarkClick = () => {
+  const handleDeleteBookmarkClick = useCallback(() => {
     setBookmarkList((prevState) => prevState.filter((ele) => ele.imdbID !== clickedBookmark.imdbID))
     handleCloseModal()
-  }
+  }, [clickedBookmark.imdbID, handleCloseModal, setBookmarkList])
 
   return (
     <>
@@ -69,7 +69,3 @@ const BookMarkModal = ({ openModal, setOpenModal, state}: propsType) => {
 }
 
 export default React.memo(BookMarkModal)
-
-// 파일 import 순서 정렬 *
-// setBookmarkList 빈배열 들어가는 문제 해결(bookmarkMovie.length === 0이면 nobookmark로 상태 바꿔줬음) *
-// useCallback 넣을지 말지 고민

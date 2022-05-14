@@ -12,5 +12,3 @@ import styles from "./loading.module.scss"
   }
 
   export default Loading
-
-  // 로딩 컴포넌트 만들기 *
