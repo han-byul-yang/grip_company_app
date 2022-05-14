@@ -8,7 +8,7 @@ export interface IMovieData {
 
 export interface ISearchData {
   Search: ImovieData[]
-  totalResults: number
+  totalResults: string
   Response: string
   Error: string
 }

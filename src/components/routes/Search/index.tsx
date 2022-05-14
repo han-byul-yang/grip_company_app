@@ -14,7 +14,8 @@ import Loading from 'components/Loading/Loading'
 import MovieCards from 'components/movieCards'
 
 const Search = () => {
-  const [apiData, setApiData] = useState<IMovieData[]>([])
+  const [apiMovieData, setApiMovieData] = useState<IMovieData[]>([])
+  const [totalResult, setTotalResult] = useState(0)
   const [searchTitle, setSearchTitle] = useState('')
   const [openModal, setOpenModal] = useState(false)
   const [noMovie, setNoMovie] = useState(true)
@@ -32,7 +33,9 @@ const Search = () => {
       if (res.data.Response === 'False') {
         setNoMovie(true)
       } else {
-        setApiData((prevState) => [...prevState,...res.data.Search])
+        console.log(typeof res.data.totalResults)
+        setApiMovieData((prevState) => [...prevState,...res.data.Search])
+        setTotalResult(parseInt(res.data.totalResults, 10))
         setNoMovie(false)
       }
       }).catch((error) => {
@@ -43,9 +46,9 @@ const Search = () => {
   useEffect(() => {
     setBookmarkIdList([]) // 이름 직관적으로 변경 필요
     bookmarkedMovies.forEach((bookmark) => 
-    apiData.forEach((api) => 
+    apiMovieData.forEach((api) => 
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
-  },[apiData, bookmarkedMovies])
+  },[apiMovieData, bookmarkedMovies])
 
   const testFetch = () =>
     // eslint-disable-next-line no-promise-executor-return
@@ -55,7 +58,7 @@ const Search = () => {
     let observer: IntersectionObserver
     if (target) {
       observer = new IntersectionObserver(async ([entry]) => {
-        if (!entry.isIntersecting) return
+        if (!entry.isIntersecting || totalResult < (page * 10)) return
         setisLoading(true)
         await testFetch()
         observer.unobserve(entry.target) // 새로 target이 설정되는 게 아니기 때문에 사실상 여기서는 필요 x
@@ -68,13 +71,13 @@ const Search = () => {
       observer.observe(target)
     }
     return () => observer && observer.disconnect()
-  }, [page, target])
+  }, [page, target, totalResult])
 
   return (
     <div>
       <Suspense fallback={<Loading />}>
         <header className={styles.header}>
-          <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiData={setApiData} />
+          <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
         </header>
         <section className={styles.section}>
           {
@@ -83,7 +86,7 @@ const Search = () => {
             <Suspense fallback={<Loading />}>
               <ul className={styles.resultList}>
                 {
-                apiData?.map((movie) => 
+                apiMovieData?.map((movie) => 
                   <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} bookmarkIdList={bookmarkIdList}  state='search' />
                   )}
                 <div className="lastMovie" ref={setTarget}>{isLoading && <div className={styles.loading}>loading</div>}</div>
@@ -111,13 +114,13 @@ export default Search
 // suspense 로 로딩 넣기(로딩 css 만들어주기)
 // 검색 결과 몇 건 삭제하거나 기능구현
 // lazy를 사용해줄 수 있을 것 
-// input으로 검색어 바꾸면 apiData 리스트도 삭제 *
+// input으로 검색어 바꾸면 apiMovieData 리스트도 삭제 *
 // api불러올 때 마다 list에 데이터를 추가해주면 다른 검색어 일 때 결과 데이터가 붙어서 나옴 *
 // 즐겨찾기 중복 알림
 // 로딩 시 탭 사라짐 현상
 // 무한 로딩 css
-// 페이지수  한계 api 제한 
-  /* if (!apiData) return null */
+// 페이지수  한계 api 제한(더이상 로드되지 않게 막음) *
+  /* if (!apiMovieData) return null */
 
   //  const handleWindowScroll = () => {
   //   setScrollLocation(window.scrollY)
@@ -126,7 +129,7 @@ export default Search
   //   console.log(document.body.scrollHeight)
   //   if (window.scrollY === window.innerHeight) {
   //     setPage((preState) => preState + 1)
-  //     setApiData((prevState) => [...prevState, ...apiData])
+  //     setApiMovieData((prevState) => [...prevState, ...apiData])
   //   } 
   // }
 

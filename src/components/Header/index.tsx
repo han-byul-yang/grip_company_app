@@ -7,10 +7,10 @@ import { IMovieData } from 'types/movie'
 interface Props {
   setSearchTitle:  Dispatch<SetStateAction<string>>
   setPage: Dispatch<SetStateAction<number>>
-  setApiData: Dispatch<SetStateAction<IMovieData[]>>
+  setApiMovieData: Dispatch<SetStateAction<IMovieData[]>>
 }
 
-const Header = ({setSearchTitle, setPage, setApiData} : Props) => {
+const Header = ({setSearchTitle, setPage, setApiMovieData} : Props) => {
   const [inputTitle, setInputTitle] = useState('')
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ const Header = ({setSearchTitle, setPage, setApiData} : Props) => {
 
   const handleTitleClick = () => {
     setPage(1)
-    setApiData([])
+    setApiMovieData([])
     setSearchTitle(inputTitle)
     setInputTitle('') // 여기를 ''로 했는데 어떻게 결과가 계속 나오지
   }
