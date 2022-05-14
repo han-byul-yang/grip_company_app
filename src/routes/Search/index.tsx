@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'hooks'
 import { Suspense } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import styles from "./search.module.scss"
 import { MovieApi } from 'utils/movieApi'
 import { IMovieData } from "types/movie"
 
-import BookMarkModal from "../../Modal"
-import Header from "../../Header"
-import Tabs from "../../Tabs"
+import BookMarkModal from "../../components/Modal"
+import Header from "../../components/Header"
+import Tabs from "../../components/Tabs"
 import { useRecoilValue } from 'recoil'
 import { BookMarkListAtom } from 'utils/atom'
 import Loading from 'components/Loading/Loading'
@@ -40,7 +41,7 @@ const Search = () => {
       }).catch((error) => {
         return error.message
     })
-  }, [page, searchTitle])
+  }, [searchTitle, page])
 
   useEffect(() => {
     setBookmarkIdList([])
@@ -49,19 +50,16 @@ const Search = () => {
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiMovieData, bookmarkedMovies])
 
-  const testFetch = () =>
-    // eslint-disable-next-line no-promise-executor-return
-    new Promise((res) => setTimeout(res, 4000))
-
   useEffect(() => {
     let observer: IntersectionObserver
     if (target) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (!entry.isIntersecting || totalResult < (page * 10)) return
-        setisLoading(true)
-        await testFetch()
         observer.unobserve(entry.target)
-        setPage(prevState => prevState + 1) 
+        setisLoading(true)
+        setTimeout(() => {
+          setPage((prevState) => prevState + 1)
+        }, 4000)
         setisLoading(false)
         observer.observe(target)
       }, {
@@ -89,8 +87,9 @@ const Search = () => {
                 apiMovieData.map((movie) => 
                   <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} bookmarkIdList={bookmarkIdList}  state='search' />
                   )}
-                <div className="lastMovie" ref={setTarget}>{isLoading && <div className={styles.loading}>loading</div>}</div>
               </ul> 
+              {isLoading && <Loading />}
+              <div className="lastMovie" ref={setTarget} />
             </Suspense>
           }
         </section>
@@ -111,7 +110,7 @@ export default Search
 // 이미지나 title 을 불러오지 못할 때 처리(대신 이미지도) *
 // lazy를 사용해줄 수 있을 것 
 // suspense 로 로딩 넣기(로딩 css 만들어주기)
-// 로딩 시 탭 사라짐 현상
+// 로딩 시 탭 사라짐 현상 *
 // input으로 검색어 바꾸면 apiMovieData 리스트도 삭제 *
 // 재로딩이 계속 되니까 title을 recoil로 처리 해줘야 하나 x
 // 이 컴포넌트에 head랑 footer태그를 같이 넣어줘야 할까 *

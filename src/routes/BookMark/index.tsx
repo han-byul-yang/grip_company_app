@@ -5,8 +5,8 @@ import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautif
 import styles from './bookmark.module.scss'
 import { BookMarkListAtom} from "utils/atom"
 
-import Tabs from "../../Tabs"
-import BookMarkModal from "../../Modal"
+import Tabs from "../../components/Tabs"
+import BookMarkModal from "../../components/Modal"
 import MovieCards from "components/MovieCards"
 
 const BookMark = () => {
@@ -64,6 +64,6 @@ export default BookMark
 // Tab를 router안에 집어 넣을 수 있는지 확인
 // bookmark bookMark 통일
 // search component의 styles랑 겹치는 문제 해결 *
-// suspense 넣기
+// suspense 넣기 x
 // section에 scss 추가해주기 *
 // movie list 분리 *

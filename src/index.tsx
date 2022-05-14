@@ -6,7 +6,7 @@ import './styles/index.scss'
 import reportWebVitals from './reportWebVitals'
 
 import {RecoilRoot} from 'recoil'
-import Router from 'components/routes'
+import Router from 'routes'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
