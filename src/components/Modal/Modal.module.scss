@@ -3,6 +3,7 @@
 @mixin modalBtn {
   width: 80px;
   height: 40px;
+  padding: 4px;
   color: $BLACK;
   border: 1px solid $BLACK;
   border-radius: 8px;
@@ -24,7 +25,8 @@
   position: fixed;
   z-index: 10;
   display: none;
-  margin-top: 50%;
+  margin-top: 100%;
+  transform: translateY(-50%);
 }
 
 .show {
@@ -69,8 +71,10 @@
 .bookmarkBtn {
   @include modalBtn;
   margin-right: 20px;
+  font-size: 11px;
 }
 
 .cancelBtn {
   @include modalBtn;
+  font-size: 13px;
 }

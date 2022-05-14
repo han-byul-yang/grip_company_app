@@ -52,7 +52,7 @@ const BookMarkModal = ({ openModal, setOpenModal, state, bookmarkIdList }: props
               type='button'
               onClick={state === 'forBookmark' ? handleAddBookmarkClick : handleDeleteBookmarkClick}
             >
-              {state === 'forBookmark' ? '즐겨찾기' : '즐겨찾기 제거'}
+              {state === 'forBookmark' ? '즐겨찾기' : `즐겨찾기 제거`}
             </button>
             <button
               className={cx(styles.cancelBtn, { [styles.unShow]: !openModal })}
