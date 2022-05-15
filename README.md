@@ -42,3 +42,17 @@
 - 영화를 누르면 즐겨찾기 해제 여부를 물어보는 창이 뜹니다. 
 - 즐겨찾기 해제를 하게 되면 영화가 즐겨찾기 목록에서 삭제 됩니다. 
 - 드래그 앤 드롭을 통해 각 영화의 순서를 바꿀 수 있고 이 순서는 유지 됩니다. 
+
+## 기술 스택
+Frontend: React, TypeScript
+
+State Management: Recoil
+
+Style: Sass
+
+Open Source: 
+> react-device-detect: 모바일 뷰 반응형 버전으로 앱 제작
+>
+> react-beautiful-dnd: 드래그 앤 드롭을 통해 영화 즐겨찾기 리스트 이동
+> 
+> recoil-persist: localStorage에 영화 즐겨찾기 데이터 저장
