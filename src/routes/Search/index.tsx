@@ -48,6 +48,10 @@ const Search = () => {
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiMovieData, bookmarkedMovies, setBookmarkIdList])
 
+  const testFetch = () =>
+  // eslint-disable-next-line no-promise-executor-return
+  new Promise((res) => setTimeout(res, 3000))
+
   useEffect(() => {
     let observer: IntersectionObserver
     if (target) {
@@ -55,6 +59,7 @@ const Search = () => {
         if (!entry.isIntersecting || totalResult < (page * 10)) return
         observer.unobserve(entry.target)
         setisLoading(true)
+        await testFetch()
         setPage(prevState => prevState + 1) 
         setisLoading(false)
         observer.observe(target)

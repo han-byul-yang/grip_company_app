@@ -21,7 +21,7 @@ const Header = ({setSearchTitle, setPage, setApiMovieData} : Props) => {
     setPage(1)
     setApiMovieData([])
     setSearchTitle(inputTitle)
-    setInputTitle('') // 여기를 ''로 했는데 어떻게 결과가 계속 나오지
+    setInputTitle('')
   }
 
   const handleTitleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
