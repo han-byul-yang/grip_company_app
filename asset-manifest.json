@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/grip-movie-app/static/css/main.43c476d4.css",
-    "main.js": "/grip-movie-app/static/js/main.e4b6579f.js",
-    "static/js/787.68ea1acb.chunk.js": "/grip-movie-app/static/js/787.68ea1acb.chunk.js",
-    "index.html": "/grip-movie-app/index.html",
-    "main.43c476d4.css.map": "/grip-movie-app/static/css/main.43c476d4.css.map",
-    "main.e4b6579f.js.map": "/grip-movie-app/static/js/main.e4b6579f.js.map",
-    "787.68ea1acb.chunk.js.map": "/grip-movie-app/static/js/787.68ea1acb.chunk.js.map"
+    "main.css": "/grip_movie_app/static/css/main.43c476d4.css",
+    "main.js": "/grip_movie_app/static/js/main.e5c216f5.js",
+    "static/js/787.68ea1acb.chunk.js": "/grip_movie_app/static/js/787.68ea1acb.chunk.js",
+    "index.html": "/grip_movie_app/index.html",
+    "main.43c476d4.css.map": "/grip_movie_app/static/css/main.43c476d4.css.map",
+    "main.e5c216f5.js.map": "/grip_movie_app/static/js/main.e5c216f5.js.map",
+    "787.68ea1acb.chunk.js.map": "/grip_movie_app/static/js/787.68ea1acb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.43c476d4.css",
-    "static/js/main.e4b6579f.js"
+    "static/js/main.e5c216f5.js"
   ]
 }
