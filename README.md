@@ -1,4 +1,4 @@
-### [Movie-App page](https://han-byul-yang.github.io/grip_movie_app/)
+### 📍[Movie-App page](https://han-byul-yang.github.io/grip_movie_app/)
 
 ## Mobile View
 ![image](https://user-images.githubusercontent.com/67466789/168452902-af445c6e-36b6-413a-a4b8-8eb9bb4f793d.png)
