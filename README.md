@@ -34,7 +34,7 @@
 - 검색 결과가 남아있지 않다면 더 이상 페이지를 보여주지 않습니다. 
 
 ## Bookmark Tab
-사진
+![image](https://user-images.githubusercontent.com/67466789/168452890-1a3f8b6e-c4e8-448e-82e0-f19c743f9f7a.png)
 - bookmark tab을 누르면 탭의 배경색이 바뀌며 기본적으로 즐겨찾기한 영화가 없다고 뜹니다.
 - 검색창에서 원하는 영화를 즐겨찾기 하면 bookmark tab에 즐겨찾기 영화가 보여지게 됩니다.
 - 영화를 누르면 즐겨찾기 해제 여부를 물어보는 창이 뜹니다. 
