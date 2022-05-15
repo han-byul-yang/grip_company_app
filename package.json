@@ -10,7 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://han-byul-yang.github.io/grip-movie-app",
+  "homepage": "http://han-byul-yang.github.io/grip_movie_app",
   "eslintConfig": {
     "extends": [
       "react-app",
