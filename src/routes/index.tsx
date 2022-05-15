@@ -5,10 +5,10 @@ import Search from './Search'
 
 const Router = () => {
     return (
-      <BrowserRouter  basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={<Search />} />
-          <Route path='bookmark' element={<BookMark />} />
+          <Route path='/bookmark' element={<BookMark />} />
         </Routes>
       </BrowserRouter>
     )

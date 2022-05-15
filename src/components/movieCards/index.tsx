@@ -27,10 +27,14 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, apiMovieData} :Card
   const {Poster, Title, Type, Year, imdbID} = movie
 
   useEffect(() => {
-    bookmarkedMovies.forEach((bookmark) => 
-    apiMovieData?.forEach((api) => 
-    JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
-  },[apiMovieData, bookmarkedMovies, setBookmarkIdList])
+    if (state === 'search'){
+      bookmarkedMovies.forEach((bookmark) => 
+      apiMovieData?.forEach((api) => 
+      JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
+    } else {
+      setBookmarkIdList(bookmarkedMovies.map((ele) => ele.imdbID))
+    }
+  },[apiMovieData, bookmarkedMovies, setBookmarkIdList, state])
 
   const handleMovieClick = (data: IMovieData) => {
     setOpenModal(true)
