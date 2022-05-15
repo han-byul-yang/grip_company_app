@@ -31,13 +31,21 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state} :CardsProps) => {
   }
 
   return (
-    <li className={styles.eachResult} ref={handleDrag?.innerRef} {...handleDrag?.draggableProps} {...handleDrag?.dragHandleProps} onClick={() => handleMovieClick(movie)} aria-hidden>
-      <img src={Poster === 'N/A' ? `${noImg}` : Poster} className={styles.poster} alt='movie poster'/>
+    <li
+      className={styles.eachResult}
+      ref={handleDrag?.innerRef}
+      {...handleDrag?.draggableProps}
+      {...handleDrag?.dragHandleProps}
+      onClick={() => handleMovieClick(movie)}
+      aria-hidden
+    >
+      <img src={Poster === 'N/A' ? `${noImg}` : Poster} className={styles.poster} alt='movie poster' />
       <div className={styles.contents}>
         <div className={styles.title}>{Title}</div>
-        <span className={styles.type}>{Type}</span> |
-        <span className={styles.year}>{Year}</span>
-        <div className={cx(styles.icon, {[styles.heart] : bookmarkIdList?.indexOf(imdbID) !== -1})}><FontAwesomeIcon icon={faHeart} /></div>
+        <span className={styles.type}>{Type}</span> |<span className={styles.year}>{Year}</span>
+        <div className={cx(styles.icon, { [styles.heart]: bookmarkIdList?.indexOf(imdbID) !== -1 })}>
+          <FontAwesomeIcon icon={faHeart} />
+        </div>
       </div>
     </li>
   )

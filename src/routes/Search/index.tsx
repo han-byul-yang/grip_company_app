@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'hooks'
+import React,{ Suspense, useEffect, useState } from 'react'
 
 import styles from "./search.module.scss"
 import { MovieApi } from 'utils/movieApi'
 import { IMovieData } from "types/movie"
-
-import BookMarkModal from "../../components/Modal"
-import Header from "../../components/Header"
-import Tabs from "../../components/Tabs"
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { BookMarkListAtom, BookMarkIdListAtom } from 'utils/atom'
+
+import Header from "../../components/Header"
+import Tabs from "../../components/Tabs"
 import Loading from 'components/Loading/Loading'
-import MovieCards from 'components/MovieCards'
+import BookMarkModal from '../../components/Modal'
+
+const MovieCards = React.lazy(() => import('components/MovieCards'))
 
 const Search = () => {
   const [apiMovieData, setApiMovieData] = useState<IMovieData[]>([])
@@ -71,12 +72,13 @@ const Search = () => {
   }, [page, target, totalResult])
 
   return (
-    <div className={styles.defaultStyle}>
-      <header className={styles.header}>
-        <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
-      </header>
-      <section className={styles.section}>
-        {
+    <Suspense fallback={<Loading state='component' />}>
+      <div className={styles.defaultStyle}>
+        <header className={styles.header}>
+          <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
+        </header>
+        <section className={styles.section}>
+          {
           noMovie ?
             <p>검색 결과가 없습니다</p> :
             <div>
@@ -87,16 +89,17 @@ const Search = () => {
                   <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} state='search' />
                   )}
               </ul> 
-              {isLoading && <Loading />}
+              {isLoading && <Loading state='page' />}
               <div className="lastMovie" ref={setTarget} />
             </div>
           }
-      </section>
-      <nav className={styles.nav}>
-        <Tabs />
-      </nav>
-      <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
-    </div>
+        </section>
+        <nav className={styles.nav}>
+          <Tabs />
+        </nav>
+        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
+      </div>
+    </Suspense>
   )
 }
 
