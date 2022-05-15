@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'hooks'
-import { Suspense } from 'react'
 
 import styles from "./search.module.scss"
 import { MovieApi } from 'utils/movieApi'
@@ -8,7 +7,7 @@ import { IMovieData } from "types/movie"
 import BookMarkModal from "../../components/Modal"
 import Header from "../../components/Header"
 import Tabs from "../../components/Tabs"
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { BookMarkListAtom, BookMarkIdListAtom } from 'utils/atom'
 import Loading from 'components/Loading/Loading'
 import MovieCards from 'components/MovieCards'
@@ -21,7 +20,7 @@ const Search = () => {
   const [noMovie, setNoMovie] = useState(true)
   const [page, setPage] = useState(1)
   const bookmarkedMovies = useRecoilValue(BookMarkListAtom)
-  const [bookmarkIdList, setBookmarkIdList] = useRecoilState(BookMarkIdListAtom)
+  const setBookmarkIdList = useSetRecoilState(BookMarkIdListAtom)
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null)
   const [isLoading, setisLoading] = useState(false)
 
@@ -48,9 +47,9 @@ const Search = () => {
     JSON.stringify(api) === JSON.stringify(bookmark) && setBookmarkIdList((prevState) => [...prevState, bookmark.imdbID])))
   },[apiMovieData, bookmarkedMovies, setBookmarkIdList])
 
-  const testFetch = () =>
-    // eslint-disable-next-line no-promise-executor-return
-    new Promise((res) => setTimeout(res, 3000))
+  // const testFetch = () =>
+  //   // eslint-disable-next-line no-promise-executor-return
+  //   new Promise((res) => setTimeout(res, 3000))
 
   useEffect(() => {
     let observer: IntersectionObserver
@@ -59,7 +58,7 @@ const Search = () => {
         if (!entry.isIntersecting || totalResult < (page * 10)) return
         observer.unobserve(entry.target)
         setisLoading(true)
-        await testFetch()
+        // await testFetch()
         setPage(prevState => prevState + 1) 
         setisLoading(false)
         observer.observe(target)
@@ -73,15 +72,14 @@ const Search = () => {
 
   return (
     <div className={styles.defaultStyle}>
-      <Suspense fallback={<Loading />}>
-        <header className={styles.header}>
-          <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
-        </header>
-        <section className={styles.section}>
-          {
+      <header className={styles.header}>
+        <Header setSearchTitle={setSearchTitle} setPage={setPage} setApiMovieData={setApiMovieData} />
+      </header>
+      <section className={styles.section}>
+        {
           noMovie ?
             <p>검색 결과가 없습니다</p> :
-            <Suspense fallback={<Loading />}>
+            <div>
               <p className={styles.result}>{totalResult} 건의 검색 결과</p>
               <ul className={styles.resultList}>
                 {
@@ -91,14 +89,13 @@ const Search = () => {
               </ul> 
               {isLoading && <Loading />}
               <div className="lastMovie" ref={setTarget} />
-            </Suspense>
+            </div>
           }
-        </section>
-        <nav className={styles.nav}>
-          <Tabs />
-        </nav>
-        <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
-      </Suspense>
+      </section>
+      <nav className={styles.nav}>
+        <Tabs />
+      </nav>
+      <BookMarkModal openModal={openModal} setOpenModal={setOpenModal} state='forBookmark' />
     </div>
   )
 }
