@@ -86,7 +86,7 @@ const Search = () => {
               <ul className={styles.resultList}>
                 {
                 apiMovieData.map((movie) => 
-                  <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} state='search' />
+                  <MovieCards key={movie.imdbID} movie={movie} setOpenModal={setOpenModal} apiMovieData={apiMovieData} state='search' />
                   )}
               </ul> 
               {isLoading && <Loading state='page' />}
