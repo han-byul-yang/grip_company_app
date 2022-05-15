@@ -51,7 +51,7 @@ const MovieCards = ({handleDrag, movie, setOpenModal, state, apiMovieData} :Card
       onClick={() => handleMovieClick(movie)}
       aria-hidden
     >
-      <img src={Poster === 'N/A' ? `${process.env.PUBLIC_URL}${noImg}` : Poster} className={styles.poster} alt='movie poster' />
+      <img src={Poster === 'N/A' ? `${process.env.PUBLIC_URL}not-available.png` : Poster} className={styles.poster} alt='movie poster' />
       <div className={styles.contents}>
         <div className={styles.title}>{Title}</div>
         <span className={styles.type}>{Type}</span> |<span className={styles.year}>{Year}</span>
