@@ -21,7 +21,7 @@
 ```
 
 ## Search Tab
-사진
+![image](https://user-images.githubusercontent.com/67466789/168452864-7554efc9-bb87-48b5-a42f-98247334f66e.png)
 - 메인 search tab을 누르면 기본적으로 영화 검색 결과가 없다고 뜹니다.
 - 검색창에 영화 제목이나 키워드를 입력한 후 Enter나 검색 버튼을 누르면 검색이 됩니다. 
 - 전체 검색 결과 수가 상단에 뜨게 됩니다.
