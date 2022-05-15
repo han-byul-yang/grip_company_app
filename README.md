@@ -1,7 +1,7 @@
 ### Movie-App page
 
 ## Mobile View
-사진
+![image](https://user-images.githubusercontent.com/67466789/168452902-af445c6e-36b6-413a-a4b8-8eb9bb4f793d.png)
 - 영화 앱을 모바일에서 볼 수 있도록 하기 위해 mobile view 버전으로 만들었습니다.
 
 ### 라이브러리
