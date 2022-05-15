@@ -47,7 +47,9 @@
 
 ## 아쉬운 점
 > react의 IntersectionObserver를 이용해서 무한 로딩을 구현 하고자 하였지만 비동기 처리 문제로 기능이 잘 동작하지 않는다.
+> 
 > 디자인(폰트, Year 버튼 처리)에 대한 고려가 많이 부족했던 것 같다.
+
 
 ## 기술 스택
 Frontend: React, TypeScript
